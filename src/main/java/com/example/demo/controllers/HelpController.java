@@ -13,7 +13,7 @@ public class HelpController {
     private HelpRepository helpRepository;
 
     @PostMapping(value = "/addhelp", consumes = {"*/*"})
-    public String addHelp(@RequestParam int county, @RequestParam String description,
+    public void addHelp(@RequestParam int county, @RequestParam String description,
                           @RequestParam String photo, @RequestParam int side,
                           @RequestParam int author){
 
@@ -26,8 +26,6 @@ public class HelpController {
         newHelp.setHelpStatus(1);
 
         helpRepository.save(newHelp);
-
-        return "ok";
     }
 
     @GetMapping(value = "/allhelps")

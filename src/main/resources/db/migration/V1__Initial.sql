@@ -1,3 +1,13 @@
+CREATE TABLE role (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE account_status (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50),
@@ -11,6 +21,28 @@ CREATE TABLE users (
     accepted TINYINT,
     FOREIGN KEY (role) REFERENCES role(id),
     FOREIGN KEY (account_status) REFERENCES account_status(id)
+);
+
+CREATE TABLE voivodeship (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) CHARACTER SET `binary`
+);
+
+CREATE TABLE county (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) CHARACTER SET `binary`,
+    voivodeship INT,
+    FOREIGN KEY (voivodeship) REFERENCES voivodeship(id)
+);
+
+CREATE TABLE help_status (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+
+CREATE TABLE help_type (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
 );
 
 CREATE TABLE help (
@@ -30,40 +62,27 @@ CREATE TABLE help (
     FOREIGN KEY (help_status) REFERENCES help_status(id)
 );
 
-CREATE TABLE county (
-    id INT PRIMARY KEY,
-    name VARCHAR(50),
-    voivodeship INT,
-    FOREIGN KEY (voivodeship) REFERENCES voivodeship(id)
-);
-
-CREATE TABLE voivodeship (
-    id INT PRIMARY KEY,
-    name VARCHAR(50)
-);
-
-CREATE TABLE role (
-    id INT PRIMARY KEY,
-    name VARCHAR(50)
-);
-
-CREATE TABLE account_status (
-    id INT PRIMARY KEY,
-    name VARCHAR(50)
-);
-
-CREATE TABLE help_status (
-    id INT PRIMARY KEY,
-    name VARCHAR(50)
-);
-
-CREATE TABLE help_type (
-    id INT PRIMARY KEY,
-    name VARCHAR(50)
-);
 
 
 INSERT INTO voivodeship (id, name) VALUES
+    (1, 'Dolnoslaskie'),
+    (2, 'Kujawsko-Pomorskie'),
+    (3, 'Lubelskie'),
+    (4, 'Lubuskie'),
+    (5, 'Lodzkie'),
+    (6, 'Malopolskie'),
+    (7, 'Mazowieckie'),
+    (8, 'Opolskie'),
+    (9, 'Podkarpackie'),
+    (10, 'Podlaskie'),
+    (11, 'Pomorskie'),
+    (12, 'Slaskie'),
+    (13, 'Swietokrzyskie'),
+    (14, 'Warminsko-mazurskie'),
+    (15, 'Wielkopolskie'),
+    (16, 'Zachodniopomorskie');
+
+  INSERT INTO voivodeship (id, name) VALUES
     (1, 'Dolnośląskie'),
     (2, 'Kujawsko-Pomorskie'),
     (3, 'Lubelskie'),
@@ -82,7 +101,7 @@ INSERT INTO voivodeship (id, name) VALUES
     (16, 'Zachodniopomorskie');
 
   INSERT INTO county (id, name, voivodeship) VALUES
-  --Dolnośląskie--
+
   (1, 'Kłodzko', 1),
   (2, 'Świdnica', 1),
   (3, 'Wrocław', 1),
@@ -95,7 +114,7 @@ INSERT INTO voivodeship (id, name) VALUES
   (10, 'Trzebnica', 1),
   (11, 'Oława', 1),
   (12, 'Ząbkowice Śląskie', 1),
-  (13, 'Jelenia Góra*', 1),
+  (13, 'Jelenia Góra', 1),
   (14, 'Polkowice', 1),
   (15, 'Wałbrzych', 1),
   (16, 'Legnica', 1),
@@ -110,7 +129,7 @@ INSERT INTO voivodeship (id, name) VALUES
   (25, 'Milicz', 1),
   (26, 'Góra', 1),
 
---Kujawsko-Pomorskie--
+
 (27, 'Aleksandrów Kujawski', 2),
 (28, 'Brodnica', 2),
 (29, 'Bydgoszcz', 2),
@@ -131,7 +150,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (44, 'Włocławek', 2),
 (45, 'Żnin', 2),
 
---Lubelskie--
+
 (46, 'Biała Podlaska', 3),
 (47, 'Biłgoraj', 3),
 (48, 'Chełm', 3),
@@ -153,7 +172,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (64, 'Włodawa', 3),
 (65, 'Zamość', 3),
 
---Lubuskie--
+
 (66, 'Gorzów Wielkopolski', 4),
 (67, 'Krosno Odrzańskie', 4),
 (68, 'Międzyrzecz', 4),
@@ -168,7 +187,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (77, 'Żary', 4),
 
 
---Łódzkie--
+
 (78, 'Bełchatów', 5),
 (79, 'Brzeziny', 5),
 (80, 'Kutno', 5),
@@ -191,7 +210,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (97, 'Zduńska Wola', 5),
 (98, 'Zgierz', 5),
 
---Małopolskie--
+
 (99, 'Bochnia', 6),
 (100, 'Brzesko', 6),
 (101, 'Chrzanów', 6),
@@ -211,7 +230,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (115, 'Wieliczka', 6),
 (116, 'Zakopane', 6),
 
---Mazowieckie--
+
 (117, 'Warszawa', 7),
 (118, 'Radom', 7),
 (119, 'Płock', 7),
@@ -311,7 +330,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (213, 'Wyśmierzyce', 7),
 
 
---Opolskie--
+
 (214, 'Opole', 8),
 (215, 'Kędzierzyn-Koźle', 8),
 (216, 'Nysa', 8),
@@ -350,7 +369,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (249, 'Ujazd', 8),
 
 
---Podkarpackie--
+
 (250, 'Ustrzyki Dolne', 9),
 (251, 'Brzozów', 9),
 (252, 'Dębica', 9),
@@ -376,7 +395,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (272, 'Rzeszów', 9),
 (273, 'Tarnobrzeg', 9),
 
---Podlaskie--
+
 (274, 'Białystok', 10),
 (275, 'Sokółka', 10),
 (276, 'Augustów', 10),
@@ -392,11 +411,11 @@ INSERT INTO voivodeship (id, name) VALUES
 (286, 'Suwałki', 10),
 (287, 'Sejny', 10),
 
---Pomorskie--
+
 (288, 'Gdańsk', 11),
-(289, '	Gdynia', 11),
-(290, '	Słupsk', 11),
-(291, '	Sopot', 11),
+(289, 'Gdynia', 11),
+(290, 'Słupsk', 11),
+(291, 'Sopot', 11),
 (292, 'Wejherowo', 11),
 (293, 'Kartuzy', 11),
 (294, 'Starogard Gdański', 11),
@@ -414,11 +433,11 @@ INSERT INTO voivodeship (id, name) VALUES
 (306, 'Sztum', 11),
 (307, 'Nowy Dwór Gdański', 11),
 
---Śląskie--
+
 (308, 'Bielsko-Biała', 12),
 (309, 'Bytom', 12),
-(310, '	Chorzów', 12),
-(311, '	Częstochowa', 12),
+(310, 'Chorzów', 12),
+(311, 'Częstochowa', 12),
 (312, 'Dąbrowa Górnicza', 12),
 (313, 'Gliwice', 12),
 (314, 'Jastrzębie-Zdrój', 12),
@@ -426,19 +445,19 @@ INSERT INTO voivodeship (id, name) VALUES
 (316, 'Katowice', 12),
 (317, 'Mysłowice', 12),
 (318, 'Piekary Śląskie', 12),
-(319, '	Ruda Śląska', 12),
-(320, '	Rybnik', 12),
+(319, 'Ruda Śląska', 12),
+(320, 'Rybnik', 12),
 (321, 'Siemianowice Śląskie', 12),
 (322, 'Sosnowiec', 12),
 (323, 'Świętochłowice', 12),
 (324, 'Tychy', 12),
-(325, '	Zabrze', 12),
+(325, 'Zabrze', 12),
 (326, 'Żory', 12),
 
---Świętokrzyskie--
+
 (327, 'Kielce', 13),
 (328, 'Ostrowiec Świętokrzyski', 13),
-(329, '	Starachowice', 13),
+(329, 'Starachowice', 13),
 (330, 'Skarżysko-Kamienna', 13),
 (331, 'Sandomierz', 13),
 (332, 'Końskie', 13),
@@ -450,7 +469,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (338, 'Opatów', 13),
 (339, 'Kazimierza Wielka', 13),
 
---Warmińsko-mazurskie--
+
 (340, 'Olsztyn', 14),
 (341, 'Elbląg', 14),
 (342, 'Ełk', 14),
@@ -474,25 +493,25 @@ INSERT INTO voivodeship (id, name) VALUES
 (360, 'Lubawa', 14),
 (361, 'Braniewo', 14),
 
---Wielkopolskie--
+
 (362, 'Chodzież', 15),
 (363, 'Czarnków', 15),
 (364, 'Gniezno', 15),
 (365, 'Gostyń', 15),
 (366, 'Grodzisk Wielkopolski', 15),
-(367, '	Jarocin', 15),
+(367, 'Jarocin', 15),
 (368, 'Kalisz', 15),
 (369, 'Kępno', 15),
 (370, 'Koło', 15),
 (371, 'Konin', 15),
-(372, '	Kościan', 15),
+(372, 'Kościan', 15),
 (373, 'Krotoszyn', 15),
 (374, 'Leszno', 15),
 (375, 'Międzychód', 15),
-(376, '	Nowy Tomyśl', 15),
+(376, 'Nowy Tomyśl', 15),
 (377, 'Ostrów Wielkopolski', 15),
 (378, 'Ostrzeszów', 15),
-(379, '	Piła', 15),
+(379, 'Piła', 15),
 (380, 'Pleszew', 15),
 (381, 'Poznań', 15),
 (382, 'Rawicz', 15),
@@ -506,7 +525,7 @@ INSERT INTO voivodeship (id, name) VALUES
 (390, 'Września', 15),
 (391, 'Złotów', 15),
 
---Zachodniopomorskie--
+
 (392, 'Białogard', 16),
 (393, 'Choszczno', 16),
 (394, 'Drawsko Pomorskie', 16),
@@ -522,25 +541,25 @@ INSERT INTO voivodeship (id, name) VALUES
 (404, 'Sławno', 16),
 (405, 'Szczecinek', 16),
 (406, 'Świdwin', 16),
-(407, '	Wałcz', 16);
+(407, 'Wałcz', 16);
 
 INSERT INTO role (id, name) VALUES
-    (1,'Uchodzca'),
-    (2,'Wolontariusz'),
+    (1,'Refugee'),
+    (2,'Volunteer'),
     (3,'Administrator');
 
 INSERT INTO account_status (id, name) VALUES
-    (1,'Odblokowany'),
-    (2,'Zablokowany');
+    (1,'Unblocked'),
+    (2,'Blocked');
 
 INSERT INTO help_status (id, name) VALUES
-    (1,'W trakcie realizacji'),
-    (2,'Zrealizowane'),
-    (3,'Niezrealizowane');
+    (1,'In progress'),
+    (2,'Completed'),
+    (3,'Uncompleted');
 
 INSERT INTO help_type (id, name) VALUES
-    (1,'Zakwaterowanie'),
-    (2,'Odzież'),
-    (3,'Żywność'),
-    (4,'Medyczna'),
-    (5,'Inne');
+    (1,'Other'),
+    (2,'Accommodation'),
+    (3,'Clothes'),
+    (4,'Food'),
+    (5,'Medicine');
