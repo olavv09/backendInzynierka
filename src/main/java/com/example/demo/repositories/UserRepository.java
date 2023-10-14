@@ -19,6 +19,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
             select * from user
             where name like '%'||:name||'%'
             or surname like '%'||:name||'%'
+            and username like '%'||:username||'%'
             and email_adress like '%'||:email_adress||'%'
             and status = coalesce(:status, status)
             and role = coalesce(:role, role)
